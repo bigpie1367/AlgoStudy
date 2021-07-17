@@ -8,18 +8,17 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Integer> nums = new ArrayList<>();
-        ArrayList<Integer> copyNums = new ArrayList<>();
-        int MAX;
         
-        for (int i = 0; i < 9; i++) {
+        int sum = 0;
+        
+        for (int i = 0; i < 5; i++) {
             nums.add(sc.nextInt());
+            sum += nums.get(i);
         }
         
-        copyNums.addAll(nums);
         Collections.sort(nums);
         
-        MAX = nums.get(nums.size() - 1);
-        System.out.println(MAX);
-        System.out.println(copyNums.indexOf(MAX) + 1);
+        System.out.println(sum / 5);
+        System.out.println(nums.get(2));
     }
 }
