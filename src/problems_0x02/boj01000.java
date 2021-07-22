@@ -1,8 +1,8 @@
-package problems;
+package problems_0x02;
 
 import java.util.Scanner;
 
-public class boj1000 {
+public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         

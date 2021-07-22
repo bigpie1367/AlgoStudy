@@ -1,4 +1,4 @@
-package problems;
+package problems_0x02;
 
 import java.util.List;
 import java.util.Scanner;

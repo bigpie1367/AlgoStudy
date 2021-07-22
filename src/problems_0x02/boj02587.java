@@ -1,4 +1,4 @@
-package problems;
+package problems_0x02;
 
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -8,17 +8,17 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Integer> nums = new ArrayList<>();
-        int a, b, c;
         
-        a = sc.nextInt();
-        b = sc.nextInt();
-        c = sc.nextInt();
+        int sum = 0;
         
-        nums.add(a); nums.add(b); nums.add(c);
+        for (int i = 0; i < 5; i++) {
+            nums.add(sc.nextInt());
+            sum += nums.get(i);
+        }
+        
         Collections.sort(nums);
         
-        for (int num : nums) {
-            System.out.print(num + " ");
-        }
+        System.out.println(sum / 5);
+        System.out.println(nums.get(2));
     }
 }
