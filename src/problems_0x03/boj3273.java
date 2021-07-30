@@ -5,33 +5,46 @@ import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.StringTokenizer;
+import java.util.Arrays;
 
-public class boj3273 {
+public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
         int N = Integer.parseInt(br.readLine());
         
-        ArrayList<Integer> nums = new ArrayList<>();
+        int[] arr = new int[N];
         StringTokenizer st = new StringTokenizer(br.readLine());
         
         for (int i = 0; i < N; i++) {
-            nums.add(Integer.parseInt(st.nextToken()));
+            arr[i] = Integer.parseInt(st.nextToken());
         }
         
         int x = Integer.parseInt(br.readLine());
         int cnt = 0;
         
-        for (int i = 0; i < N; i++) {
-            int a = nums.get(i);
+        Arrays.sort(arr);
+        
+        int strIdx = 0;
+        int endIdx = N - 1;
+        
+        while (strIdx < endIdx) {
+            int sum = arr[strIdx] + arr[endIdx];
             
-            if (nums.contains(x - a)) cnt++;
+            if (sum == x) {
+                cnt++;
+                endIdx--;
+                strIdx++;
+            } else if (sum > x) {
+                endIdx--;
+            } else if (sum < x) {
+                strIdx++;
+            }
         }
         
-        bw.write(cnt/2 + "\n");
+        bw.write(cnt + "\n");
         
         br.close();
         bw.flush();
