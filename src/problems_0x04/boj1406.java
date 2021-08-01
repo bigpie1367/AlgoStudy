@@ -6,43 +6,56 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
-public class boj1406 {
+public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        String str = br.readLine();
-        int N = Integer.parseInt(br.readLine());
+        LinkedList<Character> texts = new LinkedList<>();
         
-        LinkedList<Character> list = new LinkedList<>();    
-        for (int i = 0; i < str.length(); i++) {
-            list.add(str.charAt(i));
+        String plainText = br.readLine();
+        int M = Integer.parseInt(br.readLine());
+
+        for (int i = 0; i < plainText.length(); i++) {
+            texts.add(plainText.charAt(i));
         }
         
-        int size = list.size();
-        int cursor = list.size();
+        ListIterator<Character> iter = texts.listIterator();
         
-        for (int i = 0; i < N; i++) {
-            String[] line = br.readLine().split(" ");
+        while (iter.hasNext()) {
+            iter.next();
+        }
+        
+        for (int i = 0; i < M; i++) {
+            String command = br.readLine();
+            char c = command.charAt(0);
             
-            if (line[0].equals("L")) {
-                if (cursor > 0) cursor -= 1;
-            } else if (line[0].equals("D")) {
-                cursor += 1;
-            } else if (line[0].equals("B")) {
-                list.remove(cursor);
-            } else if (line[0].equals("P")) {
-                if (cursor >= size) {
-                    list.add(cursor, line[1].charAt(0));
-                } else {
-                    list.add(cursor + 1, line[1].charAt(0));
-                }
+            switch (c) {
+                case 'L' :
+                    if (iter.hasPrevious()) iter.previous();
+                    break;
+                case 'D' :
+                    if (iter.hasNext()) iter.next();
+                    break;
+                case 'B' :
+                    if (iter.hasPrevious()) {
+                        iter.previous();
+                        iter.remove();
+                    }
+                    
+                    break;
+                case 'P' :
+                    char t = command.charAt(2);
+                    iter.add(t);
+                    
+                    break;
             }
         }
         
-        for (Character word : list) {
-            bw.write(word + "");
+        for (Character text : texts) {
+            bw.write(text + "");
         }
         
         br.close();
