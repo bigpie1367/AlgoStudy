@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Collections;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -33,30 +34,31 @@ public class Main {
                     if (dq.isEmpty()) {
                         flag = false;
                         break;
-                    } else if (n > 0) {
-                        if (cursor) dq.removeFirst();
-                        else dq.removeLast();
-                    }
+                    } 
+                
+                    if (cursor) dq.removeFirst();
+                    else dq.removeLast();
                 }
             }
             
             if (flag == false) {
                 sb.append("error\n");
-            }
-            else {
+            } else if (dq.size() > 0) {
+                sb.append('[');
+                
                 if (cursor) {
-                    String temp = dq.toString();
-                    sb.append(temp.replace(" ", "") + "\n");
+                    sb.append(dq.pollFirst());
                     
-                }
-                else {
-                    for (int j = 0; j < dq.size() - 1; j++) {
-                        dq.addLast(dq.removeFirst());
-                    }
+                    while (!dq.isEmpty()) sb.append(',').append(dq.pollFirst());
+                } else {
+                    sb.append(dq.pollLast());
                     
-                    String temp = dq.toString();
-                    sb.append(temp.replace(" ", "") + "\n");
+                    while (!dq.isEmpty()) sb.append(',').append(dq.pollLast());
                 }
+                
+                sb.append(']').append('\n');
+            } else {
+                sb.append("[]").append('\n');
             }
         }
         
